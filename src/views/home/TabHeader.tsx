@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Box, OutlinedInput, Tab, Tabs } from "@mui/material";
 import { FiSearch } from "react-icons/fi";
 import { CiFilter } from "react-icons/ci";
@@ -17,11 +17,49 @@ const headerTabs = [
 ];
 
 const TabHeader = () => {
-  const [tabIndex, setTabIndex] = useState(0); // Default to "Explore"
-  // Handles changing tab from TabHeader
-  const handleTabChange = (_: any, newValue: number) => {
-    setTabIndex(newValue);
-  };
+  const [tabIndex, setTabIndex] = useState<number>(0);
+
+  const handleTabChange = useCallback(
+    (_: React.SyntheticEvent, newValue: number) => {
+      setTabIndex(newValue);
+    },
+    []
+  );
+
+  const tabList = useMemo(
+    () =>
+      headerTabs.map((tab) => (
+        <Tab
+          key={tab.name}
+          className="!text-lg"
+          disableRipple
+          label={tab.name}
+        />
+      )),
+    []
+  );
+
+  const filterButtons = useMemo(
+    () => (
+      <>
+        <Button className="!w-[101px]">Peer</Button>
+        <Button className="!w-[101px]">Company</Button>
+        <Button className="!w-[101px]">College</Button>
+      </>
+    ),
+    []
+  );
+
+  const tabContent = useMemo(() => {
+    switch (tabIndex) {
+      case 0:
+        return <ExplorerContent />;
+      case 1:
+        return <InviteContent />;
+      default:
+        return null;
+    }
+  }, [tabIndex]);
 
   return (
     <Box className="p-[27px] bg-[#F9F9F9] rounded-[6px] mb-7">
@@ -31,12 +69,8 @@ const TabHeader = () => {
         className="border-b border-[#D9D9D9]"
         aria-label="basic tabs example"
         sx={{
-          ".MuiTabs-indicator": {
-            display: "none",
-          },
-          ".MuiTabs-list": {
-            justifyContent: "start !important",
-          },
+          ".MuiTabs-indicator": { display: "none" },
+          ".MuiTabs-list": { justifyContent: "start !important" },
           ".MuiTabs-flexContainer": {
             justifyContent: { xs: "flex-start", sm: "center" },
             overflowX: "auto",
@@ -67,16 +101,9 @@ const TabHeader = () => {
           },
         }}
       >
-        {headerTabs?.map((tab, index) => (
-          <Tab
-            key={index}
-            className="!text-lg"
-            disableRipple
-            label={tab.name}
-          />
-        ))}
+        {tabList}
       </Tabs>
-      
+
       <Box className="pt-[15px] flex justify-between">
         <Box className="flex gap-5.5">
           <Box className="flex items-center rounded-[6px] px-3 py-3 w-[298px] h-[46px] bg-[#F2F2F2] relative">
@@ -92,9 +119,7 @@ const TabHeader = () => {
               className="pl-4"
             />
           </Box>
-          <Button className="!w-[101px]">Peer</Button>
-          <Button className="!w-[101px]">Company</Button>
-          <Button className="!w-[101px]">College</Button>
+          {filterButtons}
         </Box>
         <Button className="!w-[103px] text-gray-700 flex justify-center gap-1 !text-base items-center">
           <CiFilter className="w-4.5 h-4.5" />
@@ -106,8 +131,7 @@ const TabHeader = () => {
           tabIndex === 0 ? "!rounded-r-2xl !rounded-bl-2xl" : "rounded-2xl"
         }`}
       >
-        {tabIndex === 0 && <ExplorerContent />}
-        {tabIndex === 1 && <InviteContent />} 
+        {tabContent}
       </Box>
     </Box>
   );

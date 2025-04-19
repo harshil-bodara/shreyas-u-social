@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import CardProfile from "components/CardProfile";
 import Button from "components/Button";
 import { FaPlus, FaUserPlus } from "react-icons/fa";
-import ConnectionCard from "components/ConnectionCard";
+
 
 const cardProfiles = [
   {
