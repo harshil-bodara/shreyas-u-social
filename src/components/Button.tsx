@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 
 type ButtonProps = {
-  variant?: "default" | "contained" | "outline" | "white-contained";
+  variant?: "default" | "contained" | "outlined" | "white-contained";
   children?: React.ReactNode;
   onClick?: any;
   disabled?: boolean;
@@ -33,6 +33,10 @@ const Button: React.FC<ButtonProps> = ({
              variant === "contained" &&
              "bg-primary h-[27px] text-sm text-[#F9F9F9] hover:!bg-[#0505c1]"
            }
+             ${
+               variant === "outlined" &&
+               "border border-primary h-[27px] text-sm text-primary font-bold"
+             }
            ${className && className}
        `;
   return (
@@ -44,8 +48,8 @@ const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       <Box className="flex justify-center items-center gap-1">
-      {icon && <span>{icon}</span>}
-      {children}
+        {icon && <span>{icon}</span>}
+        {children}
       </Box>
     </button>
   );

@@ -44,7 +44,10 @@ const CardProfile = ({
             alt={`${name} logo`}
             className="w-18 h-18 rounded-full"
           />
-          <Typography className="!text-[7px] text-[#F9F9F9] -bottom-1 left-[11px] !font-bold w-[45px] h-[14px] flex justify-center items-center rounded-full absolute" style={{ backgroundColor: tagColor }}>
+          <Typography
+            className="!text-[7px] text-[#F9F9F9] -bottom-1 left-[14px] !font-bold w-[45px] h-[14px] flex justify-center items-center rounded-full absolute"
+            style={{ backgroundColor: tagColor }}
+          >
             {tag}
           </Typography>
         </Box>
@@ -68,7 +71,11 @@ const CardProfile = ({
           </Typography>
         </Box>
 
-        <Button variant="contained" className="!w-full !font-bold !mt-3" icon={icon}>
+        <Button
+          variant="contained"
+          className="!w-full !font-bold !mt-3"
+          icon={icon}
+        >
           {btnText}
         </Button>
       </Box>

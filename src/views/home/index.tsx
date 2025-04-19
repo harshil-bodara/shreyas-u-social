@@ -1,12 +1,10 @@
 import React from 'react'
-import TabHeader from './TabHeader'
-import TabContent from './explorer/ExplorerContent'
+import TabLayout from './TabLayout'
 
 const Home = () => {
   return (
     <>
-      <TabHeader/>
-      <TabContent/>
+      <TabLayout/>
     </>
   )
 }

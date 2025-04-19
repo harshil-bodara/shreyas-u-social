@@ -4,7 +4,6 @@ import CardProfile from "components/CardProfile";
 import Button from "components/Button";
 import { FaPlus, FaUserPlus } from "react-icons/fa";
 
-
 const cardProfiles = [
   {
     coverImage: "assets/images/profilebg1.png",
@@ -58,7 +57,54 @@ const cardProfiles = [
     icon: <FaPlus className="w-3.5 h-3.5" />,
     tagColor: "#77BE8A",
   },
+  {
+    coverImage: "assets/images/profilebg5.png",
+    logo: "assets/images/profile5.png",
+    name: "Kavitha Desai",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+  {
+    coverImage: "assets/images/profilebg6.png",
+    logo: "assets/images/profile6.png",
+    name: "Priya Meon",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+  {
+    coverImage: "assets/images/profilebg7.png",
+    logo: "assets/images/profile8.png",
+    name: "Amit Gupta",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
 ];
+
+const recommendedProfiles = cardProfiles.slice(0, 4);
+
+const fromCollegeProfiles = cardProfiles
+  .filter((profile) => profile.tag === "PEER")
+  .slice(0, 4);
+
+const hrProfiles = cardProfiles.slice(0, 4);
 
 const ExplorerContent = () => {
   return (
@@ -68,12 +114,12 @@ const ExplorerContent = () => {
           <Typography className="!text-[22px] !font-bold text-secondary">
             Recommended
           </Typography>
-          <Button className="!text-sm !text-primary hover:!bg-transparent !w-fit !h-fit !p-0 font-bold">
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
             View More
           </Button>
         </Box>
         <Box className="grid grid-cols-4 gap-7.5">
-          {cardProfiles.map((cardProfile, i) => {
+          {recommendedProfiles.map((cardProfile, i) => {
             return (
               <CardProfile
                 key={i}
@@ -103,29 +149,14 @@ const ExplorerContent = () => {
               PEER
             </Typography>
           </Box>
-          <Button className="!text-sm !text-primary hover:!bg-transparent !w-fit !h-fit !p-0 font-bold">
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
             View More
           </Button>
         </Box>
         <Box className="grid grid-cols-4 gap-7.5">
-          {cardProfiles.map((cardProfile, i) => {
-            return (
-              <CardProfile
-                key={i}
-                coverImage={cardProfile.coverImage}
-                logo={cardProfile.logo}
-                name={cardProfile.name}
-                tag={cardProfile.tag}
-                location={cardProfile.location}
-                followers={cardProfile.followers}
-                mutuals={cardProfile.mutuals}
-                profileContent={cardProfile.profileContent}
-                btnText={cardProfile.btnText}
-                icon={cardProfile.icon}
-                tagColor={cardProfile.tagColor}
-              />
-            );
-          })}
+          {fromCollegeProfiles.map((cardProfile, i) => (
+            <CardProfile key={i} {...cardProfile} />
+          ))}
         </Box>
       </Box>
       <Box className="pb-7">
@@ -138,43 +169,16 @@ const ExplorerContent = () => {
               HR
             </Typography>
           </Box>
-          <Button className="!text-sm !text-primary hover:!bg-transparent !w-fit !h-fit !p-0 font-bold">
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
             View More
           </Button>
         </Box>
         <Box className="grid grid-cols-4 gap-7.5">
-          {cardProfiles.map((cardProfile, i) => {
-            return (
-              <CardProfile
-                key={i}
-                coverImage={cardProfile.coverImage}
-                logo={cardProfile.logo}
-                name={cardProfile.name}
-                tag={cardProfile.tag}
-                location={cardProfile.location}
-                followers={cardProfile.followers}
-                mutuals={cardProfile.mutuals}
-                profileContent={cardProfile.profileContent}
-                btnText={cardProfile.btnText}
-                icon={cardProfile.icon}
-                tagColor={cardProfile.tagColor}
-              />
-            );
-          })}
+          {hrProfiles.map((cardProfile, i) => (
+            <CardProfile key={i} {...cardProfile} />
+          ))}
         </Box>
       </Box>
-      {/* <ConnectionCard
-        name="Ashika Devi"
-        title="BBA at Stanford University | Mumbai"
-        location="Chennai"
-        mutualConnections={123}
-        mutualConnectionName="Vishwendra"
-        imageUrl="/assets/images/profile1.png"
-        btnText="Connect"
-        icon={<FaUserPlus className="w-3.5 h-3.5" />}
-        onConnect={() => alert("Connected!")}
-        onIgnore={() => alert("Ignored!")}
-      /> */}
     </Box>
   );
 };
