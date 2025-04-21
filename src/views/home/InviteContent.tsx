@@ -19,7 +19,7 @@ const InviteContent = ({ inviteProfiles }: any) => {
     router.refresh();
   };
   return (
-    <Box className="mx-[200px] 2xl:mx-[400px]">
+    <Box className="lg:mx-[230px]">
       <Box className="bg-white flex flex-col gap-4 rounded-md">
         {inviteProfiles?.map((profile: any, index: number) => (
           <ConnectionCard
@@ -36,7 +36,6 @@ const InviteContent = ({ inviteProfiles }: any) => {
             btnText="Connect"
             outlineText="Ingore"
             icon={<FaUserPlus className="w-3.5 h-3.5" />}
-            profileContent="/assets/images/profilecontent.png"
             message={profile.message || "Hello, let's connect!"}
             onConnect={() => profile._id && handleSendFriendRequest(profile._id)}
             onIgnore={() => profile._id && handleIngoreUser(profile._id)}

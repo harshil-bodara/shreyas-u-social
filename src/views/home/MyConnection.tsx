@@ -27,7 +27,6 @@ const MyConnection = ({myConnections}:any) => {
             outlineIcon={<IoPersonRemoveOutline className="w-3.5 h-3.5" />}
             btnText="Message"
             outlineText="Remove"
-            profileContent="/assets/images/profilecontent.png"
             onConnect={() => alert(`Connected with ${myConnection.username}`)}
             onIgnore={() => alert(`Ignored ${myConnection.username}`)}
             isButtonClassName="!w-[95px]"

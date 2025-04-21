@@ -2,6 +2,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Button from "./Button";
+import Image from "next/image";
+import profileContent from "./../../public/assets/images/profile2.png"
 
 type ConnectionCardProps = {
   name: string;
@@ -14,7 +16,6 @@ type ConnectionCardProps = {
   outlineText?: string;
   icon?: any;
   outlineIcon?: any;
-  profileContent: any;
   message?: string;
   isButton?: any;
   direction?: string;
@@ -39,7 +40,6 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
   outlineIcon,
   isButton = true,
   isButtonClassName,
-  profileContent,
   message = false,
   direction,
   onConnect,
@@ -53,21 +53,25 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
       <Box className="py-[18px] w-full border-t border-[#D9D9D9]">
         <Box className="flex flex-col lg:flex-row items-center justify-between">
           <Box className="flex items-center gap-2">
-            <img
-              src={imageUrl}
-              alt={name}
+          <Image
+            src={imageUrl}
+            alt="mutual profile"
+            width={20}
+            height={20}
               className="w-[58px] h-[58px] rounded-full object-cover"
-            />
+          />
             <Box>
               <Box className="font-bold text-secondary !text-base">{name}</Box>
               <Box className="text-xs 2xl:text-sm text-[#353535]">
                 {title} | {location}
               </Box>
               <Box className="text-[10px] 2xl:text-xs text-gray-500 mt-0.5 flex items-center gap-1">
-                <img
+              <Image
                   src={profileContent}
                   alt="cover"
                   className="w-3.5 h-3.5 2xl:w-5 2xl:h-5 rounded-full object-cover"
+                  width={20}
+                  height={20}
                 />
                 {mutualConnectionName} & {mutualConnections} other mutual
                 connection

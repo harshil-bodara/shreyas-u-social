@@ -2,6 +2,8 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "./Button";
+import Image from "next/image";
+import imgurl from "./../../public/assets/images/profilebg1.png"
 
 interface CardProfileProps {
   coverImage: any;
@@ -19,8 +21,9 @@ interface CardProfileProps {
   onConnectRequest?: () => void;
 }
 
+
+
 const CardProfile = ({
-  coverImage,
   logo,
   name,
   tag,
@@ -36,19 +39,24 @@ const CardProfile = ({
 }: CardProfileProps) => {
   return (
     <Box className="bg-white rounded-[6px] w-full text-center">
-      <img
-        src={coverImage}
+      <Image
+        src={imgurl}
         alt="cover"
+        width={200}
+        height={69}
         className="w-full h-[69px] rounded-t-[6px] object-cover"
       />
 
       <Box className="flex flex-col items-center p-5 pt-0 -mt-12">
         <Box className="relative">
-          <img
-            src={logo}
-            alt={`${name} logo`}
-            className="w-18 h-18 rounded-full"
-          />
+        
+  <Image
+    src={logo}
+    alt={`${name} logo`}
+    width={72}
+    height={72}
+    className="w-18 h-18 rounded-full"
+  />
           <Typography
             className="!text-[7px] text-[#F9F9F9] -bottom-1 left-[14px] !font-bold w-[45px] h-[14px] flex justify-center items-center rounded-full absolute"
             style={{ backgroundColor: tagColor }}
@@ -66,11 +74,13 @@ const CardProfile = ({
           {followers}
         </Box>
         <Box className="flex items-center gap-1">
-          <img
-            src={profileContent}
-            alt="cover"
-            className="w-5 h-5 rounded-full object-cover"
-          />
+        <Image
+        src={profileContent}
+        alt="mutual profile"
+        width={20}
+        height={20}
+        className="w-5 h-5 rounded-full object-cover"
+      />
           <Typography className="!text-[10px] text-gray-700">
             {mutuals}
           </Typography>

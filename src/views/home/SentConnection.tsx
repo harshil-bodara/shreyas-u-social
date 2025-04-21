@@ -37,7 +37,6 @@ const SentConnection = ({sendProfiles}:any) => {
           mutualConnections={sentProfile.connections}
           mutualConnectionName="Vishvendra"
           imageUrl={sentProfile.coverImage}
-          profileContent="/assets/images/profilecontent.png"
           direction={sentProfile.direction}
           isButton={false}
           outlineText="withdraw"

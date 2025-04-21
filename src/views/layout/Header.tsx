@@ -1,13 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-const navLinks = [
-  { name: "For Patients" },
-  { name: "For Medical Practitioners" },
-  { name: "For Medical Labs Services" },
-  { name: "For Clinics & Hospitals" },
-];
-
 const Header = () => {
   return (
     <>

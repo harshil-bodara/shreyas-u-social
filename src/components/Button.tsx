@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "@mui/material";
 import React from "react";
 
@@ -16,7 +17,6 @@ const Button: React.FC<ButtonProps> = ({
   variant = "default",
   children,
   onClick,
-  disabled,
   className,
   isLoading,
   type,
