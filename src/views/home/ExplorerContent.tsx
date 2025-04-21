@@ -1,0 +1,197 @@
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import CardProfile from "components/CardProfile";
+import Button from "components/Button";
+import { FaPlus, FaUserPlus } from "react-icons/fa";
+import { HiUsers } from "react-icons/hi";
+
+const cardProfiles = [
+  {
+    coverImage: "assets/images/profilebg1.png",
+    logo: "assets/images/profile1.png",
+    name: "Ashika Devi",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Connect",
+    icon: <FaUserPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+  {
+    coverImage: "assets/images/profilebg2.png",
+    logo: "assets/images/profile2.png",
+    name: "Indranil Biswas",
+    tag: "HR",
+    location: "Co-Founder at Eventive",
+    followers: "Communications LLP | Bangal...",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Connect",
+    icon: <FaUserPlus className="w-3.5 h-3.5" />,
+    tagColor: "#8787FC",
+  },
+  {
+    coverImage: "assets/images/profilebg3.png",
+    logo: "assets/images/profile3.png",
+    name: "Google",
+    tag: "COMPANY",
+    location: "IT Industry - Bangalore",
+    followers: (
+      <div className="flex text-[10px] gap-0.5 text-gray-700">
+        <HiUsers className="w-3.5 h-3.5" />
+        <span className="mt-[1px]">3M followers</span>
+      </div>
+    ),
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#77BE8A",
+  },
+  {
+    coverImage: "assets/images/profilebg4.png",
+    logo: "assets/images/profile4.png",
+    name: "Stanford University",
+    tag: "COLLEGE",
+    location: "BBA at Stanford University",
+    followers: (
+      <div className="flex text-[10px] gap-0.5 text-gray-700">
+        <HiUsers className="w-3.5 h-3.5" />
+        <span className="mt-[1px]">3M followers</span>
+      </div>
+    ),
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#77BE8A",
+  },
+  {
+    coverImage: "assets/images/profilebg5.png",
+    logo: "assets/images/profile5.png",
+    name: "Kavitha Desai",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+  {
+    coverImage: "assets/images/profilebg6.png",
+    logo: "assets/images/profile6.png",
+    name: "Priya Meon",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+  {
+    coverImage: "assets/images/profilebg7.png",
+    logo: "assets/images/profile8.png",
+    name: "Amit Gupta",
+    tag: "PEER",
+    location: "BBA at Stanford University",
+    followers: "Mumbai",
+    mutuals: "Vishwendra is mutual connection",
+    profileContent: "/assets/images/profilecontent.png",
+    btnText: "Follow",
+    icon: <FaPlus className="w-3.5 h-3.5" />,
+    tagColor: "#FAA464",
+  },
+];
+
+const recommendedProfiles = cardProfiles.slice(0, 4);
+
+const fromCollegeProfiles = cardProfiles
+  .filter((profile) => profile.tag === "PEER")
+  .slice(0, 4);
+
+const hrProfiles = cardProfiles.slice(0, 4);
+
+const ExplorerContent = () => {
+  return (
+    <Box className="xl:mx-16 2xl:mx-30">
+      <Box className="pb-7">
+        <Box className="flex justify-between items-center pb-[15px]">
+          <Typography className="!text-[22px] !font-bold text-secondary">
+            Recommended
+          </Typography>
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
+            View More
+          </Button>
+        </Box>
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
+          {recommendedProfiles.map((cardProfile, i) => {
+            return (
+              <CardProfile
+                key={i}
+                coverImage={cardProfile.coverImage}
+                logo={cardProfile.logo}
+                name={cardProfile.name}
+                tag={cardProfile.tag}
+                location={cardProfile.location}
+                followers={cardProfile.followers}
+                mutuals={cardProfile.mutuals}
+                profileContent={cardProfile.profileContent}
+                btnText={cardProfile.btnText}
+                icon={cardProfile.icon}
+                tagColor={cardProfile.tagColor}
+              />
+            );
+          })}
+        </Box>
+      </Box>
+      <Box className="pb-7">
+        <Box className="flex justify-between items-center pb-[15px]">
+          <Box className="flex gap-3 items-center">
+            <Typography className="!text-[22px] !font-bold text-secondary">
+              From your college
+            </Typography>
+            <Typography className="!text-[7px] text-[#F9F9F9] pt-[3px] !font-bold bg-[#FAA464] w-[45px] h-[14px] flex justify-center items-center rounded-full">
+              PEER
+            </Typography>
+          </Box>
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
+            View More
+          </Button>
+        </Box>
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-7.5">
+          {fromCollegeProfiles.map((cardProfile, i) => (
+            <CardProfile key={i} {...cardProfile} />
+          ))}
+        </Box>
+      </Box>
+      <Box className="pb-7">
+        <Box className="flex justify-between items-center pb-[15px]">
+          <Box className="flex gap-3 items-center">
+            <Typography className="!text-[22px] !font-bold text-secondary">
+              Recommended HR’s
+            </Typography>
+            <Typography className="!text-[7px] text-[#F9F9F9] pt-[3px] !font-bold bg-[#8787FC] w-[45px] h-[14px] flex justify-center items-center rounded-full">
+              HR
+            </Typography>
+          </Box>
+          <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
+            View More
+          </Button>
+        </Box>
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-7.5">
+          {hrProfiles.map((cardProfile, i) => (
+            <CardProfile key={i} {...cardProfile} />
+          ))}
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default ExplorerContent;

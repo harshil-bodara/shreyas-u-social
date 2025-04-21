@@ -6,9 +6,11 @@ import { Box, OutlinedInput, Tab, Tabs } from "@mui/material";
 import { FiSearch } from "react-icons/fi";
 import { CiFilter } from "react-icons/ci";
 import Button from "components/Button";
-import InviteContent from "./invite/InviteContent";
-import ExplorerContent from "./explorer/ExplorerContent";
+import InviteContent from "./InviteContent";
+import ExplorerContent from "./ExplorerContent";
 import { IoIosLogOut } from "react-icons/io";
+import SentConnection from "./SentConnection";
+import MyConnection from "./MyConnection";
 
 const CustomTabPanel = ({
   children,
@@ -38,8 +40,14 @@ const TabLayout = ({explorerlist, inviteProfiles}:any) => {
 
   return (
     <>
-      <Box className="p-[27px] bg-[#F9F9F9] rounded-[6px] mb-7">
-        <Box className="flex justify-between items-center border-b border-[#D9D9D9]">
+      <Box className="ml-auto w-fit">
+        <Button className="!h-[36px] !w-[100px] font-bold">
+          <IoIosLogOut className="w-5 h-5" />
+          Log Out
+        </Button>
+      </Box>
+      <Box className="p-4 sm:p-[27px] bg-[#F9F9F9] rounded-[6px] mb-7">
+        <Box className="flex flex-col sm:flex-row justify-between border-b border-[#D9D9D9] overflow-x-auto w-full">
           <Tabs
             value={tabIndex}
             onChange={handleTabChange}
@@ -84,20 +92,16 @@ const TabLayout = ({explorerlist, inviteProfiles}:any) => {
             {headerTabs?.map((tab, index) => (
               <Tab
                 key={index}
-                className="!text-lg"
+                className="!text-base sm:!text-lg"
                 disableRipple
                 label={tab.name}
               />
             ))}
           </Tabs>
-          <Button className="!h-[36px] !w-[100px] font-bold">
-            <IoIosLogOut className="w-5 h-5" />
-            Log Out
-          </Button>
         </Box>
         <Box className="pt-[15px] flex justify-between">
-          <Box className="flex gap-5.5">
-            <Box className="flex items-center rounded-[6px] px-3 py-3 w-[298px] h-[46px] bg-[#F2F2F2] relative">
+          <Box className="flex flex-wrap md:flex-nowrap justify-between w-full gap-2 sm:gap-4 md:gap-5.5">
+            <Box className="flex items-center rounded-[6px] px-3 py-3 w-full md:w-[298px] h-[35px] sm:h-[46px] bg-[#F2F2F2] relative">
               <FiSearch className="text-gray-700 mr-2 text-lg absolute" />
               <OutlinedInput
                 sx={{
@@ -107,14 +111,26 @@ const TabLayout = ({explorerlist, inviteProfiles}:any) => {
                   },
                 }}
                 placeholder="Search"
-                className="pl-4"
+                className="pl-2.5"
               />
             </Box>
-            <Button className="!w-[101px]">Peer</Button>
-            <Button className="!w-[101px]">Company</Button>
-            <Button className="!w-[101px]">College</Button>
+            <Box className="flex items-center gap-3 md:gap-[22px] w-full">
+              <Button className="!w-[65px] !h-[35px] sm:!h-[46px] sm:!w-[101px]">
+                Peer
+              </Button>
+              <Button className="!w-[65px] !h-[35px] sm:!h-[46px] sm:!w-[101px]">
+                Company
+              </Button>
+              <Button className="!w-[65px] !h-[35px] sm:!h-[46px] sm:!w-[101px]">
+                College
+              </Button>
+              <Button className="!w-[65px] !h-[35px] sm:!h-[46px] sm:!w-[101px] text-gray-700 flex lg:hidden justify-center gap-1 !text-xs items-center">
+                <CiFilter className="w-3.5 h-3.5" />
+                Filter
+              </Button>
+            </Box>
           </Box>
-          <Button className="!w-[103px] text-gray-700 flex justify-center gap-1 !text-base items-center">
+          <Button className="!w-[103px] text-gray-700 hidden lg:flex justify-center gap-1 !text-base items-center">
             <CiFilter className="w-4.5 h-4.5" />
             Filter
           </Button>
@@ -126,6 +142,12 @@ const TabLayout = ({explorerlist, inviteProfiles}:any) => {
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={1}>
           <InviteContent  inviteProfiles={inviteProfiles}/>
+        </CustomTabPanel>
+        <CustomTabPanel value={tabIndex} index={2}>
+          <SentConnection />
+        </CustomTabPanel>
+        <CustomTabPanel value={tabIndex} index={3}>
+          <MyConnection />
         </CustomTabPanel>
       </Box>
     </>

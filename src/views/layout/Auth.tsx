@@ -23,11 +23,11 @@ export default function AuthLayout({ children }: React.PropsWithChildren) {
   return (
     <Box className="flex min-h-screen">
       {!isLoginPage && (
-        <Box className="md:w-[260px] h-screen fixed overflow-hidden z-10 md:z-auto">
+        <Box className="xl:w-[260px] h-screen fixed overflow-hidden z-10 xl:z-auto">
           <Sidebar />
         </Box>
       )}
-      <Box className={!isLoginPage ? 'md:ml-[260px] md:w-[calc(100%-264px)] w-full' : 'w-full'}>
+      <Box className={!isLoginPage ? 'xl:ml-[260px] xl:w-[calc(100%-264px)] w-full' : 'w-full'}>
         {!isLoginPage && <Header />}
         <Box className="p-6">{children}</Box>
       </Box>

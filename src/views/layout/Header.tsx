@@ -11,7 +11,7 @@ const navLinks = [
 const Header = () => {
   return (
     <>
-      <Box className="py-4 px-6 w-full h-[72px] justify-between items-center gap-4 mb-7"></Box>
+      <Box className="xl:py-4 xl:px-6 w-full xl:h-[72px] xl:mb-7 justify-between items-center gap-4"></Box>
     </>
   );
 };
