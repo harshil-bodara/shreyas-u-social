@@ -82,10 +82,10 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
   };
 
   return (
-    <Box className="mx-[80px] 2xl:mx-[200px]">
-      <Box className="pb-7">
+    <Box className="xl:mx-16 2xl:mx-30">
+      <Box className="pb-12 sm:pb-10 md:pb-7">
         <Box className="flex justify-between items-center pb-[15px]">
-          <Typography className="!text-[22px] !font-bold text-secondary">
+          <Typography className="!text-base sm:!text-[22px] !font-bold text-secondary">
             Recommended
           </Typography>
           <Button className="!text-sm !text-primary !bg-transparent !w-fit !h-fit !p-0 font-bold">
@@ -109,10 +109,10 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
           })}
         </Box>
       </Box>
-      <Box className="pb-7">
+      <Box className="pb-12 sm:pb-10 md:pb-7">
         <Box className="flex justify-between items-center pb-[15px]">
           <Box className="flex gap-3 items-center">
-            <Typography className="!text-[22px] !font-bold text-secondary">
+            <Typography className="!text-base sm:!text-[22px] !font-bold text-secondary">
               From your college
             </Typography>
             <Typography className="!text-[7px] text-[#F9F9F9] pt-[3px] !font-bold bg-[#FAA464] w-[45px] h-[14px] flex justify-center items-center rounded-full">
@@ -123,7 +123,7 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             View More
           </Button>
         </Box>
-        <Box className="grid grid-cols-4 gap-7.5">
+<Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
           {fromCollegeProfiles.length > 0 ? (
             fromCollegeProfiles.map((cardProfile: ProfileType, i: number) => (
               <CardProfile
@@ -141,10 +141,10 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
           )}
         </Box>
       </Box>
-      <Box className="pb-7">
+      <Box className="pb-12 sm:pb-10 md:pb-7">
         <Box className="flex justify-between items-center pb-[15px]">
           <Box className="flex gap-3 items-center">
-            <Typography className="!text-[22px] !font-bold text-secondary">
+            <Typography className="!text-base sm:!text-[22px] !font-bold text-secondary">
               Recommended HR’s
             </Typography>
             <Typography className="!text-[7px] text-[#F9F9F9] pt-[3px] !font-bold bg-[#8787FC] w-[45px] h-[14px] flex justify-center items-center rounded-full">
@@ -155,7 +155,7 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             View More
           </Button>
         </Box>
-        <Box className="grid grid-cols-4 gap-7.5">
+    <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
           {hrProfiles.length > 0 ? (
             hrProfiles.map((cardProfile: ProfileType, i: number) => (
               <CardProfile
@@ -187,7 +187,7 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             View More
           </Button>
         </Box>
-        <Box className="grid grid-cols-4 gap-7.5">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
           {companyProfiles.length > 0 ? (
             companyProfiles.map((cardProfile: ProfileType, i: number) => (
               <Box key={i} className="relative">

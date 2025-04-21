@@ -18,7 +18,6 @@ export const loginAction = createAsyncThunk(
           await axios.post("/api/auth", { token });
         }
         return token; 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || 'Login failed')
       }

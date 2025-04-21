@@ -11,6 +11,7 @@ import ExplorerContent from "./ExplorerContent";
 import { IoIosLogOut } from "react-icons/io";
 import SentConnection from "./SentConnection";
 import MyConnection from "./MyConnection";
+import Following from "./Following";
 
 const CustomTabPanel = ({
   children,
@@ -41,12 +42,12 @@ const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:a
   return (
     <>
       <Box className="ml-auto w-fit">
-        <Button className="!h-[36px] !w-[100px] font-bold">
+        <Button className="!h-[36px] !w-[100px] font-bold lg:hidden bg-[#f9f9f9] mb-2">
           <IoIosLogOut className="w-5 h-5" />
           Log Out
         </Button>
       </Box>
-      <Box className="p-4 sm:p-[27px] bg-[#F9F9F9] rounded-[6px] mb-7">
+      <Box className="p-4 sm:p-[27px] bg-[#F9F9F9] rounded-[6px] mb-4 sm:mb-7">
         <Box className="flex flex-col sm:flex-row justify-between border-b border-[#D9D9D9] overflow-x-auto w-full">
           <Tabs
             value={tabIndex}
@@ -98,6 +99,10 @@ const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:a
               />
             ))}
           </Tabs>
+          <Button className="!h-[36px] !w-[100px] font-bold hidden lg:flex justify-center items-center">
+          <IoIosLogOut className="w-5 h-5" />
+          Log Out
+        </Button>
         </Box>
         <Box className="pt-[15px] flex justify-between">
           <Box className="flex flex-wrap md:flex-nowrap justify-between w-full gap-2 sm:gap-4 md:gap-5.5">
@@ -148,6 +153,9 @@ const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:a
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={3}>
           <MyConnection myConnections={myConnections}/>
+        </CustomTabPanel>
+        <CustomTabPanel value={tabIndex} index={4}>
+          <Following />
         </CustomTabPanel>
       </Box>
     </>

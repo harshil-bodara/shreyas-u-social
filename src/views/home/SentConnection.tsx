@@ -24,7 +24,7 @@ const SentConnection = ({sendProfiles}:any) => {
     router.refresh();
   };
   return (
-    <Box className="lg:mx-[230px]">
+    <Box className="sm:mx-10 md:mx-20 xl:mx-[230px]">
       <Box className="bg-white flex flex-col p-[27px] rounded-md">
         <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
          {sendProfiles.length} Sent Connections

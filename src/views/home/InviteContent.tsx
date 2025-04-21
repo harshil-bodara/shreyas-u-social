@@ -19,10 +19,10 @@ const InviteContent = ({ inviteProfiles }: any) => {
     router.refresh();
   };
   return (
-    <Box className="lg:mx-[230px]">
+    <Box className="sm:mx-10 md:mx-20 xl:mx-[230px]">
       <Box className="bg-white flex flex-col p-[27px] rounded-md">
-      <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
-         {inviteProfiles?.length} Sent Connections
+        <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
+          {inviteProfiles?.length} Sent Connections
         </Typography>
         {inviteProfiles?.map((profile: any, index: number) => (
           <ConnectionCard
@@ -38,10 +38,12 @@ const InviteContent = ({ inviteProfiles }: any) => {
             } // Use dynamic cover image
             btnText="Connect"
             outlineText="Ingore"
-            isButtonClassName="!w-[132px]"
             icon={<FaUserPlus className="w-3.5 h-3.5" />}
+            isButtonClassName="!w-full sm:!w-[132px]"
             message={profile.message || "Hello, let's connect!"}
-            onConnect={() => profile._id && handleSendFriendRequest(profile._id)}
+            onConnect={() =>
+              profile._id && handleSendFriendRequest(profile._id)
+            }
             onIgnore={() => profile._id && handleIngoreUser(profile._id)}
           />
         ))}
