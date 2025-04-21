@@ -11,7 +11,7 @@ import ExplorerContent from "./ExplorerContent";
 import { IoIosLogOut } from "react-icons/io";
 import SentConnection from "./SentConnection";
 import MyConnection from "./MyConnection";
-import Following from "./Following";
+
 
 const CustomTabPanel = ({
   children,
@@ -153,9 +153,6 @@ const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:a
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={3}>
           <MyConnection myConnections={myConnections}/>
-        </CustomTabPanel>
-        <CustomTabPanel value={tabIndex} index={4}>
-          <Following />
         </CustomTabPanel>
       </Box>
     </>
