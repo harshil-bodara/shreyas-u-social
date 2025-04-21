@@ -12,14 +12,14 @@ const MyConnection = ({myConnections}:any) => {
     <Box className="lg:mx-[230px]">
       <Box className="bg-white flex flex-col p-[27px] rounded-md">
         <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
-          775 Connections
+        {myConnections?.length} Connections
         </Typography>
         {myConnections.map((myConnection:any, index:number) => (
           <ConnectionCard
             key={index}
-            name={myConnection.username}
-            title={`${myConnection.designation} | ${myConnection.city}`}
-            location={myConnection.city || "Mumbai"}
+            name={myConnection.username || myConnection.name}
+            title={`${myConnection.designation || "company"} | ${myConnection.city  || "Mumbai" }`}
+            location={myConnection.city}
             mutualConnections={myConnection.connections}
             mutualConnectionName="Vishvendra"
             imageUrl={myConnection.coverImage}

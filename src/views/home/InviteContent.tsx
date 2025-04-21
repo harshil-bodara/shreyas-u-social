@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ConnectionCard from "components/ConnectionCard";
 import useAuth from "hook/useAuth";
 import { useRouter } from "next/navigation";
@@ -20,7 +20,10 @@ const InviteContent = ({ inviteProfiles }: any) => {
   };
   return (
     <Box className="lg:mx-[230px]">
-      <Box className="bg-white flex flex-col gap-4 rounded-md">
+      <Box className="bg-white flex flex-col p-[27px] rounded-md">
+      <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
+         {inviteProfiles?.length} Sent Connections
+        </Typography>
         {inviteProfiles?.map((profile: any, index: number) => (
           <ConnectionCard
             key={index}
@@ -35,6 +38,7 @@ const InviteContent = ({ inviteProfiles }: any) => {
             } // Use dynamic cover image
             btnText="Connect"
             outlineText="Ingore"
+            isButtonClassName="!w-[132px]"
             icon={<FaUserPlus className="w-3.5 h-3.5" />}
             message={profile.message || "Hello, let's connect!"}
             onConnect={() => profile._id && handleSendFriendRequest(profile._id)}

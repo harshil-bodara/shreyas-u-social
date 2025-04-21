@@ -121,7 +121,7 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
           </Box>
         </Box>
         {message && (
-          <Box className="bg-gray-100 border border-[#D9D9D9] text-sm text-gray-800 p-2.5 rounded-md mt-2">
+          <Box className="bg-[#f2f2f2] border border-[#D9D9D9] text-sm text-gray-800 p-2.5 rounded-md mt-2">
             {message}
           </Box>
         )}

@@ -93,11 +93,20 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
           </Button>
         </Box>
         <Box className="grid grid-cols-4 gap-7.5">
-          {recommendedProfiles.map((cardProfile: ProfileType, i: number) => (
-            <CardProfile key={i} {...cardProfile} onConnectRequest={() =>
-              cardProfile.id && handleSendFriendRequest(cardProfile.id)
-            }/>
-          ))}
+          {recommendedProfiles.map((cardProfile: ProfileType, i: number) => {
+            const isCompany = cardProfile.type === "company";
+
+            return (
+              <CardProfile
+                key={i}
+                {...cardProfile}
+                isCompany={isCompany}
+                onfollowUnfollow={isCompany ? () => cardProfile.id && handleCompanyFollow(cardProfile.id, "follow") : undefined}
+                // Pass onConnectRequest if it's not a company
+                onConnectRequest={!isCompany ? () => cardProfile.id && handleSendFriendRequest(cardProfile.id) : undefined}
+              />
+            );
+          })}
         </Box>
       </Box>
       <Box className="pb-7">

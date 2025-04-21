@@ -27,7 +27,7 @@ const SentConnection = ({sendProfiles}:any) => {
     <Box className="lg:mx-[230px]">
       <Box className="bg-white flex flex-col p-[27px] rounded-md">
         <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
-          6 Sent Connections
+         {sendProfiles.length} Sent Connections
         </Typography>
         {sendProfiles?.map((sentProfile:any, index:number) => (
           <ConnectionCard

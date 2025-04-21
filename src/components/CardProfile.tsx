@@ -15,6 +15,7 @@ interface CardProfileProps {
   mutuals: string;
   btnText: string;
   icon?: any;
+  isCompany?: boolean;
   profileContent: any;
   tagColor?: any;
   onfollowUnfollow?: () => void;
@@ -32,6 +33,7 @@ const CardProfile = ({
   mutuals,
   btnText,
   icon,
+  isCompany,
   profileContent,
   tagColor,
   onfollowUnfollow,
@@ -90,7 +92,7 @@ const CardProfile = ({
           variant="contained"
           className="!w-full !font-bold !mt-3"
           icon={icon}
-          onClick={onfollowUnfollow || onConnectRequest}
+          onClick={isCompany ? onfollowUnfollow : onConnectRequest}
         >
           {btnText}
         </Button>
