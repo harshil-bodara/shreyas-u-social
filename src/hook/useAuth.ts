@@ -22,8 +22,8 @@ const useAuth = () => {
 
   const handleLogout = () => dispatch(logout());
 
-  const withdrawConnection = (connectionId: string) => {
-    return dispatch(withdrawConnectionAction({ connectionId }));
+  const withdrawConnection = (targetUserId: string) => {
+    return dispatch(withdrawConnectionAction({ targetUserId }));
   };
 
   const ignoreUser = (ignoredUserId: string) => {

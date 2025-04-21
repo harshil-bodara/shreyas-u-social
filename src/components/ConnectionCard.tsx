@@ -17,9 +17,13 @@ type ConnectionCardProps = {
   profileContent: any;
   message?: string;
   isButton?: any;
+  direction?: string;
   isButtonClassName?: string;
-  onConnect: () => void;
-  onIgnore: () => void;
+  onConnect?: () => void;
+  onIgnore?: () => void;
+  onWithdraw?: () => void;
+  onReject?: () => void;
+  onAccept?: () => void;
 };
 
 const ConnectionCard: React.FC<ConnectionCardProps> = ({
@@ -37,8 +41,12 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
   isButtonClassName,
   profileContent,
   message = false,
+  direction,
   onConnect,
   onIgnore,
+  onWithdraw,
+  onReject,
+  onAccept,
 }) => {
   return (
     <Box className="bg-white rounded-md">
@@ -69,20 +77,41 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
           </Box>
 
           <Box className="flex items-center gap-3">
-            <Button
-              variant="outlined"
-              className="!text-[11px]"
-              icon={outlineIcon}
-            >
-              {outlineText}
-            </Button>
             {isButton && (
               <Button
                 variant="contained"
                 className={`!h-[27px] !font-bold !text-[11px] ${isButtonClassName}`}
                 icon={icon}
+                onClick={onConnect}
               >
                 {btnText}
+              </Button>
+            )}
+            {direction === "received" ? (
+              <>
+                <Button
+                  variant="outlined"
+                  className="!text-[11px]"
+                  onClick={onReject}
+                >
+                  Reject
+                </Button>
+                <Button
+                  variant="contained"
+                  className="!h-[27px] !font-bold !text-[11px]"
+                  onClick={onAccept}
+                >
+                  Accept
+                </Button>
+              </>
+            ) : (
+              <Button
+                variant="outlined"
+                className="!text-[11px]"
+                icon={outlineIcon}
+                onClick={onIgnore || onWithdraw}
+              >
+                {outlineText}
               </Button>
             )}
           </Box>

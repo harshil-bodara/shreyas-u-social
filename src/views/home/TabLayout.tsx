@@ -32,7 +32,7 @@ const headerTabs = [
   { name: "Following" },
 ];
 
-const TabLayout = ({explorerlist, inviteProfiles}:any) => {
+const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:any) => {
   const [tabIndex, setTabIndex] = useState(0);
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
@@ -144,10 +144,10 @@ const TabLayout = ({explorerlist, inviteProfiles}:any) => {
           <InviteContent  inviteProfiles={inviteProfiles}/>
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={2}>
-          <SentConnection />
+          <SentConnection  sendProfiles={sendProfiles}/>
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={3}>
-          <MyConnection />
+          <MyConnection myConnections={myConnections}/>
         </CustomTabPanel>
       </Box>
     </>

@@ -1,77 +1,51 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import ConnectionCard from "components/ConnectionCard";
+import useAuth from "hook/useAuth";
+import { useRouter } from "next/navigation";
 
-const sentProfiles = [
-  {
-    imageUrl: "assets/images/profile1.png",
-    name: "Ashika Devi",
-    designation: "BBA at Stanford University",
-    location: "Mumbai",
-    mutualConnections: "Vishvendra is mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile2.png",
-    name: "Indranil Biswas",
-    designation: "Co-Founder at Eventive Communications LLP",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra is mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile5.png",
-    name: "Kavitha Desai",
-    designation: "BBA @ Abc University",
-    location: "Chennai",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile6.png",
-    name: "Priya Meon",
-    designation: "Developer @ IJEENI",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra is mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile8.png",
-    name: "Amit Gupta",
-    designation: "Human Resources Head @ IJEENI",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile5.png",
-    name: "Kavitha Desai",
-    designation: "BBA @ Abc University",
-    location: "Chennai",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-];
+const SentConnection = ({sendProfiles}:any) => {
+  const router = useRouter();
+  const { withdrawConnection, friendRequest } = useAuth();
 
-const SentConnection = () => {
+  const handleWithdrawUser = async (targetUserId: string) => {
+    await withdrawConnection(targetUserId);
+    router.refresh();
+  };
+
+  const handleAcceptFriendRequest = async (receiverId: string) => {
+    await friendRequest("accept", { receiverId });
+    router.refresh();
+  };
+
+  const handleRejectFriendRequest = async (receiverId: string) => {
+    await friendRequest("reject", { receiverId });
+    router.refresh();
+  };
   return (
     <Box className="lg:mx-[230px]">
       <Box className="bg-white flex flex-col p-[27px] rounded-md">
         <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
           6 Sent Connections
         </Typography>
-        {sentProfiles.map((sentProfile, index) => (
+        {sendProfiles?.map((sentProfile:any, index:number) => (
           <ConnectionCard
-            key={index}
-            name={sentProfile.name}
-            title={`${sentProfile.designation} | ${sentProfile.location}`}
-            mutualConnections={
-              sentProfile.mutualConnections.includes("&") ? 123 : 1
-            }
-            mutualConnectionName="Vishvendra"
-            imageUrl={sentProfile.imageUrl}
-            icon={false}
-            isButton={false}
-            outlineText="Withdraw"
-            profileContent="/assets/images/profilecontent.png"
-            onConnect={() => alert(`Connected with ${sentProfile.name}`)}
-            onIgnore={() => alert(`Ignored ${sentProfile.name}`)}
-            location={""}
-          />
+          key={index}
+          name={sentProfile.username || sentProfile.name}
+          title={`${sentProfile.designation || sentProfile.description} | ${sentProfile.city || ""}`}
+          mutualConnections={sentProfile.connections}
+          mutualConnectionName="Vishvendra"
+          imageUrl={sentProfile.coverImage}
+          profileContent="/assets/images/profilecontent.png"
+          direction={sentProfile.direction}
+          isButton={false}
+          outlineText="withdraw"
+          onWithdraw={() => sentProfile._id && handleWithdrawUser(sentProfile._id)}
+          onAccept={() => sentProfile._id && handleAcceptFriendRequest(sentProfile._id)}
+          onReject={() => sentProfile._id && handleRejectFriendRequest(sentProfile._id)}
+          location=""
+        />
         ))}
       </Box>
     </Box>

@@ -1,83 +1,45 @@
-import { Box, Typography } from "@mui/material";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Box } from "@mui/material";
 import ConnectionCard from "components/ConnectionCard";
+import useAuth from "hook/useAuth";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { FaUserPlus } from "react-icons/fa";
 
-const inviteProfiles = [
-  {
-    imageUrl: "assets/images/profile1.png",
-    name: "Ashika Devi",
-    designation: "BBA at Stanford University",
-    location: "Mumbai",
-    mutualConnections: "Vishvendra is mutual connection",
-    message:
-      "Your story continues on mobile: Build and edit decks. Give and receive feedback. Add content from any other app.",
-  },
-  {
-    imageUrl: "assets/images/profile2.png",
-    name: "Indranil Biswas",
-    designation: "Co-Founder at Eventive Communications LLP",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra is mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile5.png",
-    name: "Kavitha Desai",
-    designation: "BBA @ Abc University",
-    location: "Chennai",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile6.png",
-    name: "Priya Meon",
-    designation: "Developer @ IJEENI",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra is mutual connection",
-    message:
-      "Hey hi, I would like to ask you some question regarding your college. It doesn’t take long, only few minutes. Just like that. Can you help me with this?",
-  },
-  {
-    imageUrl: "assets/images/profile8.png",
-    name: "Amit Gupta",
-    designation: "Human Resources Head @ IJEENI",
-    location: "Bangalore",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-  {
-    imageUrl: "assets/images/profile5.png",
-    name: "Kavitha Desai",
-    designation: "BBA @ Abc University",
-    location: "Chennai",
-    mutualConnections: "Vishvendra & 123 other mutual connection",
-  },
-];
+const InviteContent = ({ inviteProfiles }: any) => {
+  const router = useRouter();
+  const { friendRequest, ignoreUser } = useAuth();
+  const handleSendFriendRequest = async (receiverId: string) => {
+    await friendRequest("send", { receiverId });
+    router.refresh();
+  };
 
-const InviteContent = () => {
+  const handleIngoreUser = async (ignoredUserId: string) => {
+    await ignoreUser(ignoredUserId);
+    router.refresh();
+  };
   return (
-    <Box className="lg:mx-[230px]">
-      <Box className="bg-white flex flex-col p-[27px] rounded-md">
-        <Typography className="text-[#8C8C8C] !font-bold !text-xs 2xl:!text-sm !mb-3">
-          24 Invites
-        </Typography>
-        {inviteProfiles.map((profile, index) => (
+    <Box className="mx-[200px] 2xl:mx-[400px]">
+      <Box className="bg-white flex flex-col gap-4 rounded-md">
+        {inviteProfiles?.map((profile: any, index: number) => (
           <ConnectionCard
             key={index}
-            name={profile.name}
-            title={`${profile.designation} | ${profile.location}`}
-            mutualConnections={
-              profile.mutualConnections.includes("&") ? 123 : 1
-            }
+            name={profile.username}
+            title={`${profile.designation} | ${profile.city}`}
+            location={profile.city || "Mumbai"}
+            mutualConnections={profile.connections}
             mutualConnectionName="Vishvendra"
-            imageUrl={profile.imageUrl}
+            imageUrl={
+              profile.coverImage ||
+              `/assets/images/profile${(index % 5) + 1}.png`
+            } // Use dynamic cover image
             btnText="Connect"
+            outlineText="Ingore"
             icon={<FaUserPlus className="w-3.5 h-3.5" />}
             profileContent="/assets/images/profilecontent.png"
-            message={profile.message ?? ""}
-            outlineText="Ignore"
-            isButtonClassName="!w-[132px]"
-            onConnect={() => alert(`Connected with ${profile.name}`)}
-            onIgnore={() => alert(`Ignored ${profile.name}`)}
-            location={""}
+            message={profile.message || "Hello, let's connect!"}
+            onConnect={() => profile._id && handleSendFriendRequest(profile._id)}
+            onIgnore={() => profile._id && handleIngoreUser(profile._id)}
           />
         ))}
       </Box>

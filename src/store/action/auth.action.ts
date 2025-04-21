@@ -28,11 +28,11 @@ export const loginAction = createAsyncThunk(
 export const withdrawConnectionAction = createAsyncThunk(
   'auth/withdrawConnection',
   async (
-    { connectionId }: { connectionId: string },
+    { targetUserId }: { targetUserId: string },
     { rejectWithValue, fulfillWithValue }
   ) => {
     try {
-      const response = await API.post('/users/withdrawconnection', { connectionId });
+      const response = await API.post('/users/withdrawconnection', { targetUserId });
       if (response.status === 200) {
         Toast.success(response.data.message);
       }
