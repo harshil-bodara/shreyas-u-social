@@ -14,13 +14,13 @@ const SentConnection = ({sendProfiles}:any) => {
     router.refresh();
   };
 
-  const handleAcceptFriendRequest = async (receiverId: string) => {
-    await friendRequest("accept", { receiverId });
+  const handleAcceptFriendRequest = async (requestId: string) => {
+    await friendRequest("accept", { requestId });
     router.refresh();
   };
 
-  const handleRejectFriendRequest = async (receiverId: string) => {
-    await friendRequest("reject", { receiverId });
+  const handleRejectFriendRequest = async (requestId: string) => {
+    await friendRequest("reject", { requestId });
     router.refresh();
   };
   return (
