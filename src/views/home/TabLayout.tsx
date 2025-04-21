@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState } from "react";
@@ -29,7 +30,7 @@ const headerTabs = [
   { name: "Following" },
 ];
 
-const TabLayout = () => {
+const TabLayout = ({explorerlist, inviteProfiles}:any) => {
   const [tabIndex, setTabIndex] = useState(0);
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
@@ -121,10 +122,10 @@ const TabLayout = () => {
       </Box>
       <Box>
         <CustomTabPanel value={tabIndex} index={0}>
-          <ExplorerContent />
+          <ExplorerContent  explorerlist={explorerlist}/>
         </CustomTabPanel>
         <CustomTabPanel value={tabIndex} index={1}>
-          <InviteContent />
+          <InviteContent  inviteProfiles={inviteProfiles}/>
         </CustomTabPanel>
       </Box>
     </>

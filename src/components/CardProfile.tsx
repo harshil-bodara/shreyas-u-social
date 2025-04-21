@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "./Button";
@@ -14,6 +15,8 @@ interface CardProfileProps {
   icon?: any;
   profileContent: any;
   tagColor?: any;
+  onfollowUnfollow?: () => void;
+  onConnectRequest?: () => void;
 }
 
 const CardProfile = ({
@@ -28,6 +31,8 @@ const CardProfile = ({
   icon,
   profileContent,
   tagColor,
+  onfollowUnfollow,
+  onConnectRequest
 }: CardProfileProps) => {
   return (
     <Box className="bg-white rounded-[6px] w-full text-center">
@@ -75,6 +80,7 @@ const CardProfile = ({
           variant="contained"
           className="!w-full !font-bold !mt-3"
           icon={icon}
+          onClick={onfollowUnfollow || onConnectRequest}
         >
           {btnText}
         </Button>

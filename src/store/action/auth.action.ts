@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import Toast from "components/Toast";
 import API from "utils/axiosInstance";
 
@@ -14,6 +15,7 @@ export const loginAction = createAsyncThunk(
         const { token } = response.data
         if (response.status === 200) {
           Toast.success(response.data.message);
+          await axios.post("/api/auth", { token });
         }
         return token; 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -75,7 +77,7 @@ export const friendRequestAction = createAsyncThunk(
     try {
       const response = await API.post(`/friend/${type}`, payload);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         Toast.success(response.data.message || `Friend ${type} request successful`);
       }
       return rejectWithValue('Unexpected error');

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box } from "@mui/material";
 import React from "react";
 import Button from "./Button";
@@ -60,11 +61,12 @@ const ConnectionCard: React.FC<ConnectionCardProps> = ({
           </Box>
 
           <Box className="flex items-center gap-3">
-            <Button variant="outlined">Ignore</Button>
+            <Button variant="outlined" onClick={onIgnore}>Ignore</Button>
             <Button
               variant="contained"
               className="!w-[132px] !h-[27px] !font-bold"
               icon={icon}
+              onClick={onConnect}
             >
               {btnText}
             </Button>
