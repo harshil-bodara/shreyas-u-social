@@ -32,7 +32,7 @@ const useAuth = () => {
 
   const friendRequest = (
     type: "send" | "accept" | "reject" | "requests",
-    payload: { receiverId?: string; requestId?: string }
+    payload: { receiverId?: string; requestId?: string, comment?:string }
   ) => {
     return dispatch(friendRequestAction({ type, payload }));
   };

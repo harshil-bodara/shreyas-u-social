@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import CardProfile from "components/CardProfile";
 import Button from "components/Button";
 import { FaPlus, FaUserPlus } from "react-icons/fa";
 import useAuth from "hook/useAuth";
 import { useRouter } from "next/navigation";
+import ConnectionRequestModal from "components/ConnectionRequestModal";
 
 type ProfileType = {
   coverImage: string;
@@ -28,6 +29,9 @@ type ExplorerContentProps = {
 };
 
 const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
   const { companyFollowUnfollow, friendRequest } = useAuth();
   const router = useRouter();
 
@@ -38,7 +42,7 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
       name: profile.username || profile.name || "Anonymous",
       tag: profile.type ? profile.type.toUpperCase() : "USER",
       location: "Mumbai",
-      followers: `${profile.connections + ' Followers'}`,
+      followers: `${profile.connections + " Followers"}`,
       mutuals: "Vishwendra is mutual connection",
       profileContent: "/assets/images/profilecontent.png",
       btnText: profile.type === "company" ? "Follow" : "Connect",
@@ -68,6 +72,23 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
   const hrProfiles: ProfileType[] = groupedProfiles["HR"] || [];
   const companyProfiles: ProfileType[] = groupedProfiles["COMPANY"] || [];
 
+  const handleOpenModal = (id: string) => {
+    setSelectedUserId(id);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setComment("");
+    setSelectedUserId(null);
+  };
+
+  const handleSend = async () => {
+    if (!selectedUserId) return;
+    await handleSendFriendRequest(selectedUserId, comment);
+    handleCloseModal();
+  };
+
   const handleCompanyFollow = async (
     companyId: string,
     type: "follow" | "unfollow"
@@ -76,8 +97,11 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
     router.refresh();
   };
 
-  const handleSendFriendRequest = async (receiverId: string) => {
-    await friendRequest("send", { receiverId });
+  const handleSendFriendRequest = async (
+    receiverId: string,
+    comment: string
+  ) => {
+    await friendRequest("send", { receiverId, comment });
     router.refresh();
   };
 
@@ -101,9 +125,18 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
                 key={i}
                 {...cardProfile}
                 isCompany={isCompany}
-                onfollowUnfollow={isCompany ? () => cardProfile.id && handleCompanyFollow(cardProfile.id, "follow") : undefined}
-                // Pass onConnectRequest if it's not a company
-                onConnectRequest={!isCompany ? () => cardProfile.id && handleSendFriendRequest(cardProfile.id) : undefined}
+                onfollowUnfollow={
+                  isCompany
+                    ? () =>
+                        cardProfile.id &&
+                        handleCompanyFollow(cardProfile.id, "follow")
+                    : undefined
+                }
+                onConnectRequest={
+                  !isCompany
+                    ? () => cardProfile.id && handleOpenModal(cardProfile.id)
+                    : undefined
+                }
               />
             );
           })}
@@ -123,14 +156,14 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             View More
           </Button>
         </Box>
-<Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
           {fromCollegeProfiles.length > 0 ? (
             fromCollegeProfiles.map((cardProfile: ProfileType, i: number) => (
               <CardProfile
                 key={i}
                 {...cardProfile}
                 onConnectRequest={() =>
-                  cardProfile.id && handleSendFriendRequest(cardProfile.id)
+                  cardProfile.id && handleOpenModal(cardProfile.id)
                 }
               />
             ))
@@ -155,14 +188,14 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             View More
           </Button>
         </Box>
-    <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
+        <Box className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7.5">
           {hrProfiles.length > 0 ? (
             hrProfiles.map((cardProfile: ProfileType, i: number) => (
               <CardProfile
                 key={i}
                 {...cardProfile}
                 onConnectRequest={() =>
-                  cardProfile.id && handleSendFriendRequest(cardProfile.id)
+                  cardProfile.id && handleOpenModal(cardProfile.id)
                 }
               />
             ))
@@ -206,6 +239,14 @@ const ExplorerContent = ({ explorerlist }: ExplorerContentProps) => {
             </Typography>
           )}
         </Box>
+
+        <ConnectionRequestModal
+          open={openModal}
+          comment={comment}
+          onCommentChange={setComment}
+          onCancel={handleCloseModal}
+          onSend={handleSend}
+        />
       </Box>
     </Box>
   );

@@ -69,7 +69,7 @@ export const friendRequestAction = createAsyncThunk(
       payload
     }: {
       type: 'send' | 'accept' | 'reject' | 'requests';
-      payload: { receiverId?: string; requestId?: string };
+      payload: { receiverId?: string; requestId?: string; comment?:string };
     },
     { rejectWithValue }
   ) => {

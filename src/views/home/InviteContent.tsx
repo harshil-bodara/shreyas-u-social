@@ -1,16 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Typography } from "@mui/material";
 import ConnectionCard from "components/ConnectionCard";
+import ConnectionRequestModal from "components/ConnectionRequestModal";
 import useAuth from "hook/useAuth";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { FaUserPlus } from "react-icons/fa";
 
 const InviteContent = ({ inviteProfiles }: any) => {
   const router = useRouter();
   const { friendRequest, ignoreUser } = useAuth();
-  const handleSendFriendRequest = async (receiverId: string) => {
-    await friendRequest("send", { receiverId });
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [comment, setComment] = useState("");
+
+  const handleOpenModal = (id: string) => {
+    setSelectedUserId(id);
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setComment("");
+    setSelectedUserId(null);
+  };
+
+  const handleSend = async () => {
+    if (!selectedUserId) return;
+    await handleSendFriendRequest(selectedUserId, comment);
+    handleCloseModal();
+  };
+  const handleSendFriendRequest = async (
+    receiverId: string,
+    comment: string
+  ) => {
+    await friendRequest("send", { receiverId, comment });
     router.refresh();
   };
 
@@ -40,13 +64,18 @@ const InviteContent = ({ inviteProfiles }: any) => {
             outlineText="Ingore"
             icon={<FaUserPlus className="w-3.5 h-3.5" />}
             isButtonClassName="!w-full sm:!w-[132px]"
-            message={profile.message || "Hello, let's connect!"}
-            onConnect={() =>
-              profile._id && handleSendFriendRequest(profile._id)
-            }
+            message={profile.comment || "Hello, let's connect!"}
+            onConnect={() => profile._id && handleOpenModal(profile._id)}
             onIgnore={() => profile._id && handleIngoreUser(profile._id)}
           />
         ))}
+        <ConnectionRequestModal
+          open={openModal}
+          comment={comment}
+          onCommentChange={setComment}
+          onCancel={handleCloseModal}
+          onSend={handleSend}
+        />
       </Box>
     </Box>
   );

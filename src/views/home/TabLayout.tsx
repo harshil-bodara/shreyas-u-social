@@ -11,6 +11,8 @@ import ExplorerContent from "./ExplorerContent";
 import { IoIosLogOut } from "react-icons/io";
 import SentConnection from "./SentConnection";
 import MyConnection from "./MyConnection";
+import useAuth from "hook/useAuth";
+import { useRouter } from "next/navigation";
 
 
 const CustomTabPanel = ({
@@ -35,6 +37,8 @@ const headerTabs = [
 
 const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:any) => {
   const [tabIndex, setTabIndex] = useState(0);
+  const router = useRouter();
+  const {handleLogout} = useAuth();
   const handleTabChange = (_: any, newValue: number) => {
     setTabIndex(newValue);
   };
@@ -99,7 +103,9 @@ const TabLayout = ({explorerlist, inviteProfiles, sendProfiles, myConnections}:a
               />
             ))}
           </Tabs>
-          <Button className="!h-[36px] !w-[100px] font-bold hidden lg:flex justify-center items-center">
+          <Button className="!h-[36px] !w-[100px] font-bold hidden lg:flex justify-center items-center" onClick={() => {handleLogout();
+            router.push("/login")
+          }}>
           <IoIosLogOut className="w-5 h-5" />
           Log Out
         </Button>
