@@ -1,4 +1,11 @@
+"use client";
+
 import React from "react";
+import Button from "./Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Box, TextField } from "@mui/material";
 
 interface ConnectionRequestModalProps {
   open: boolean;
@@ -18,33 +25,37 @@ const ConnectionRequestModal = ({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-      <div className="bg-white p-6 rounded-lg shadow-md w-[400px]">
-        <h2 className="text-lg font-bold mb-2">Send Connection Request</h2>
-
-        <textarea
-          className="w-full border rounded p-2 mb-4"
+    <Dialog
+      open={open}
+      onClose={onCancel}
+      aria-labelledby="connection-dialog-title"
+      maxWidth="xs"
+      fullWidth
+    >
+      <DialogTitle className="text-lg !font-bold !pb-2">
+        Send Connection Request
+      </DialogTitle>
+      <DialogContent>
+        <TextField
+          className="w-full p-2 !mb-6"
           placeholder="Add a message (optional)"
           value={comment}
           onChange={(e) => onCommentChange(e.target.value)}
         />
-
-        <div className="flex justify-end gap-2">
-          <button
-            className="bg-gray-200 text-gray-700 px-4 py-2 rounded"
-            onClick={onCancel}
-          >
+        <Box className="flex items-center gap-2 justify-end">
+          <Button className="!h-9 !w-[100px] !font-bold" onClick={onCancel}>
             Cancel
-          </button>
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+          </Button>
+          <Button
+            variant="contained"
+            className="!h-9 !w-[100px] !font-bold"
             onClick={onSend}
           >
             Send
-          </button>
-        </div>
-      </div>
-    </div>
+          </Button>
+        </Box>
+      </DialogContent>
+    </Dialog>
   );
 };
 
